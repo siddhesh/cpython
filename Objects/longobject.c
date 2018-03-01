@@ -2537,7 +2537,7 @@ PyLong_FromUnicodeObject(PyObject *u, int base)
 /* forward */
 static PyLongObject *x_divrem
     (PyLongObject *, PyLongObject *, PyLongObject **);
-static PyObject *long_long(PyObject *v);
+static PyObject *long_long(PyObject *v, void *unused);
 
 /* Int division with remainder, top-level routine */
 
@@ -2557,7 +2557,7 @@ long_divrem(PyLongObject *a, PyLongObject *b,
         (size_a == size_b &&
          a->ob_digit[size_a-1] < b->ob_digit[size_b-1])) {
         /* |a| < |b|. */
-        *prem = (PyLongObject *)long_long((PyObject *)a);
+        *prem = (PyLongObject *)long_long((PyObject *)a, NULL);
         if (*prem == NULL) {
             return -1;
         }
@@ -4242,7 +4242,7 @@ long_abs(PyLongObject *v)
     if (Py_SIZE(v) < 0)
         return long_neg(v);
     else
-        return long_long((PyObject *)v);
+        return long_long((PyObject *)v, NULL);
 }
 
 static int
@@ -4554,7 +4554,7 @@ long_or(PyObject *a, PyObject *b)
 }
 
 static PyObject *
-long_long(PyObject *v)
+long_long(PyObject *v, void *unused)
 {
     if (PyLong_CheckExact(v))
         Py_INCREF(v);
@@ -5028,7 +5028,7 @@ long_round(PyObject *self, PyObject *args)
     if (!PyArg_ParseTuple(args, "|O", &o_ndigits))
         return NULL;
     if (o_ndigits == NULL)
-        return long_long(self);
+        return long_long(self, NULL);
 
     ndigits = PyNumber_Index(o_ndigits);
     if (ndigits == NULL)
@@ -5037,7 +5037,7 @@ long_round(PyObject *self, PyObject *args)
     /* if ndigits >= 0 then no rounding is necessary; return self unchanged */
     if (Py_SIZE(ndigits) >= 0) {
         Py_DECREF(ndigits);
-        return long_long(self);
+        return long_long(self, NULL);
     }
 
     /* result = self - divmod_near(self, 10 ** -ndigits)[1] */

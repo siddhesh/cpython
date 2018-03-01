@@ -1609,7 +1609,7 @@ odict_richcompare(PyObject *v, PyObject *w, int op)
 /* tp_iter */
 
 static PyObject *
-odict_iter(PyODictObject *od)
+odict_iter(PyODictObject *od, void *unused)
 {
     return odictiter_new(od, _odict_ITER_KEYS);
 }
