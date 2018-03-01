@@ -894,7 +894,7 @@ static int odict_init(PyObject *self, PyObject *args, PyObject *kwds);
 
 PyDoc_STRVAR(odict_iter__doc__, "od.__iter__() <==> iter(od)");
 
-static PyObject * odict_iter(PyODictObject *self);  /* forward */
+static PyObject * odict_iter(PyODictObject *self, void *unused);  /* forward */
 
 /* __ne__() */
 
@@ -911,7 +911,7 @@ odict_ne(PyObject *a, PyObject *b)
 
 PyDoc_STRVAR(odict_repr__doc__, "od.__repr__() <==> repr(od)");
 
-static PyObject * odict_repr(PyODictObject *self);  /* forward */
+static PyObject * odict_repr(PyODictObject *self, void *unused);  /* forward */
 
 /* __setitem__() */
 
@@ -942,7 +942,7 @@ OrderedDict_fromkeys_impl(PyTypeObject *type, PyObject *seq, PyObject *value)
 PyDoc_STRVAR(odict_sizeof__doc__, "");
 
 static PyObject *
-odict_sizeof(PyODictObject *od)
+odict_sizeof(PyODictObject *od, void *unused)
 {
     Py_ssize_t res = _PyDict_SizeOf((PyDictObject *)od);
     res += sizeof(_ODictNode *) * _odict_FAST_SIZE(od);  /* od_fast_nodes */
@@ -957,7 +957,7 @@ odict_sizeof(PyODictObject *od)
 PyDoc_STRVAR(odict_reduce__doc__, "Return state information for pickling");
 
 static PyObject *
-odict_reduce(register PyODictObject *od)
+odict_reduce(register PyODictObject *od, void *unused)
 {
     _Py_IDENTIFIER(__dict__);
     _Py_IDENTIFIER(items);
@@ -1466,7 +1466,7 @@ odict_dealloc(PyODictObject *self)
 /* tp_repr */
 
 static PyObject *
-odict_repr(PyODictObject *self)
+odict_repr(PyODictObject *self, void *unused)
 {
     int i;
     _Py_IDENTIFIER(items);
