@@ -83,7 +83,7 @@ get_arg(const _Py_CODEUNIT *codestr, Py_ssize_t i)
  *    iterator needs to be on the stack.
  */
 static int
-frame_setlineno(PyFrameObject *f, PyObject* p_new_lineno)
+frame_setlineno(PyFrameObject *f, PyObject* p_new_lineno, void *closure)
 {
     int new_lineno = 0;                 /* The new value of f_lineno */
     long l_new_lineno;
