@@ -2279,7 +2279,7 @@ PyDoc_STRVAR(match_group_doc,
     For 0 returns the entire match.");
 
 static PyObject *
-match_lastindex_get(MatchObject *self)
+match_lastindex_get(MatchObject *self, void *closure)
 {
     if (self->lastindex >= 0)
         return PyLong_FromSsize_t(self->lastindex);
@@ -2287,7 +2287,7 @@ match_lastindex_get(MatchObject *self)
 }
 
 static PyObject *
-match_lastgroup_get(MatchObject *self)
+match_lastgroup_get(MatchObject *self, void *closure)
 {
     if (self->pattern->indexgroup &&
         self->lastindex >= 0 &&
@@ -2302,7 +2302,7 @@ match_lastgroup_get(MatchObject *self)
 }
 
 static PyObject *
-match_regs_get(MatchObject *self)
+match_regs_get(MatchObject *self, void *closure)
 {
     if (self->regs) {
         Py_INCREF(self->regs);
