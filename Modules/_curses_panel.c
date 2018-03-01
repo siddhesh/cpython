@@ -235,7 +235,7 @@ PyCursesPanel_Dealloc(PyCursesPanelObject *po)
 /* panel_above(NULL) returns the bottom panel in the stack. To get
    this behaviour we use curses.panel.bottom_panel(). */
 static PyObject *
-PyCursesPanel_above(PyCursesPanelObject *self)
+PyCursesPanel_above(PyCursesPanelObject *self, void *unused)
 {
     PANEL *pan;
     PyCursesPanelObject *po;
@@ -259,7 +259,7 @@ PyCursesPanel_above(PyCursesPanelObject *self)
 /* panel_below(NULL) returns the top panel in the stack. To get
    this behaviour we use curses.panel.top_panel(). */
 static PyObject *
-PyCursesPanel_below(PyCursesPanelObject *self)
+PyCursesPanel_below(PyCursesPanelObject *self, void *unused)
 {
     PANEL *pan;
     PyCursesPanelObject *po;
@@ -281,7 +281,7 @@ PyCursesPanel_below(PyCursesPanelObject *self)
 }
 
 static PyObject *
-PyCursesPanel_window(PyCursesPanelObject *self)
+PyCursesPanel_window(PyCursesPanelObject *self, void *unused)
 {
     Py_INCREF(self->wo);
     return (PyObject *)self->wo;
@@ -391,7 +391,7 @@ static PyType_Spec PyCursesPanel_Type_spec = {
    panel.above() *requires* a panel object in the first place which
    may be undesirable. */
 static PyObject *
-PyCurses_bottom_panel(PyObject *self)
+PyCurses_bottom_panel(PyObject *self, void *unused)
 {
     PANEL *pan;
     PyCursesPanelObject *po;
@@ -436,7 +436,7 @@ PyCurses_new_panel(PyObject *self, PyObject *args)
    *requires* a panel object in the first place which may be
    undesirable. */
 static PyObject *
-PyCurses_top_panel(PyObject *self)
+PyCurses_top_panel(PyObject *self, void *unused)
 {
     PANEL *pan;
     PyCursesPanelObject *po;
@@ -459,7 +459,7 @@ PyCurses_top_panel(PyObject *self)
     return (PyObject *)po;
 }
 
-static PyObject *PyCurses_update_panels(PyObject *self)
+static PyObject *PyCurses_update_panels(PyObject *self, void *unused)
 {
     PyCursesInitialised;
     update_panels();

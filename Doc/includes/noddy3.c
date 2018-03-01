@@ -145,7 +145,7 @@ static PyGetSetDef Noddy_getseters[] = {
 };
 
 static PyObject *
-Noddy_name(Noddy* self)
+Noddy_name(Noddy* self, void *unused)
 {
     return PyUnicode_FromFormat("%S %S", self->first, self->last);
 }

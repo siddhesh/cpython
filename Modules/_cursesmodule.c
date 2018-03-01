@@ -1110,7 +1110,7 @@ PyCursesWindow_Enclose(PyCursesWindowObject *self, PyObject *args)
 #endif
 
 static PyObject *
-PyCursesWindow_GetBkgd(PyCursesWindowObject *self)
+PyCursesWindow_GetBkgd(PyCursesWindowObject *self, void *unused)
 {
     return PyLong_FromLong((long) getbkgd(self->win));
 }
@@ -2167,7 +2167,7 @@ NoArgNoReturnVoidFunction(noqiflush)
 
 #ifdef HAVE_CURSES_FILTER
 static PyObject *
-PyCurses_filter(PyObject *self)
+PyCurses_filter(PyObject *self, void *unused)
 {
     /* not checking for PyCursesInitialised here since filter() must
        be called before initscr() */
@@ -2235,7 +2235,7 @@ PyCurses_Delay_Output(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-PyCurses_EraseChar(PyObject *self)
+PyCurses_EraseChar(PyObject *self, void *unused)
 {
     char ch;
 
@@ -2248,7 +2248,7 @@ PyCurses_EraseChar(PyObject *self)
 
 #ifdef getsyx
 static PyObject *
-PyCurses_getsyx(PyObject *self)
+PyCurses_getsyx(PyObject *self, void *unused)
 {
     int x = 0;
     int y = 0;
@@ -2263,7 +2263,7 @@ PyCurses_getsyx(PyObject *self)
 
 #ifdef NCURSES_MOUSE_VERSION
 static PyObject *
-PyCurses_GetMouse(PyObject *self)
+PyCurses_GetMouse(PyObject *self, void *unused)
 {
     int rtn;
     MEVENT event;
@@ -2424,7 +2424,7 @@ PyCurses_Init_Pair(PyObject *self, PyObject *args)
 static PyObject *ModDict;
 
 static PyObject *
-PyCurses_InitScr(PyObject *self)
+PyCurses_InitScr(PyObject *self, void *unused)
 {
     WINDOW *win;
     PyCursesWindowObject *winobj;
@@ -2639,7 +2639,7 @@ PyCurses_KeyName(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-PyCurses_KillChar(PyObject *self)
+PyCurses_KillChar(PyObject *self, void *unused)
 {
     char ch;
 
@@ -2889,7 +2889,7 @@ update_lines_cols(void)
 }
 
 static PyObject *
-PyCurses_update_lines_cols(PyObject *self)
+PyCurses_update_lines_cols(PyObject *self), void *unused
 {
   return PyLong_FromLong((long) update_lines_cols());
 }
@@ -2964,7 +2964,7 @@ PyCurses_setsyx(PyObject *self, PyObject *args)
 #endif
 
 static PyObject *
-PyCurses_Start_Color(PyObject *self)
+PyCurses_Start_Color(PyObject *self, void *unused)
 {
     int code;
     PyObject *c, *cp;
@@ -3192,7 +3192,7 @@ PyCurses_Use_Env(PyObject *self, PyObject *args)
 
 #ifndef STRICT_SYSV_CURSES
 static PyObject *
-PyCurses_Use_Default_Colors(PyObject *self)
+PyCurses_Use_Default_Colors(PyObject *self, void *unused)
 {
     int code;
 

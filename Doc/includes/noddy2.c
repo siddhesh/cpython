@@ -82,7 +82,7 @@ static PyMemberDef Noddy_members[] = {
 };
 
 static PyObject *
-Noddy_name(Noddy* self)
+Noddy_name(Noddy* self, void *unused)
 {
     if (self->first == NULL) {
         PyErr_SetString(PyExc_AttributeError, "first");

@@ -132,7 +132,7 @@ PyDoc_STRVAR(localeconv__doc__,
 "() -> dict. Returns numeric and monetary locale-specific parameters.");
 
 static PyObject*
-PyLocale_localeconv(PyObject* self)
+PyLocale_localeconv(PyObject* self, void *unused)
 {
     PyObject* result;
     struct lconv *l;
@@ -317,7 +317,7 @@ exit:
 
 #if defined(MS_WINDOWS)
 static PyObject*
-PyLocale_getdefaultlocale(PyObject* self)
+PyLocale_getdefaultlocale(PyObject* self, void *unused)
 {
     char encoding[100];
     char locale[100];

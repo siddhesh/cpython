@@ -2590,7 +2590,7 @@ delta_getstate(PyDateTime_Delta *self)
 }
 
 static PyObject *
-delta_total_seconds(PyObject *self)
+delta_total_seconds(PyObject *self, void *unused)
 {
     PyObject *total_seconds;
     PyObject *total_microseconds;
@@ -2606,7 +2606,7 @@ delta_total_seconds(PyObject *self)
 }
 
 static PyObject *
-delta_reduce(PyDateTime_Delta* self)
+delta_reduce(PyDateTime_Delta* self, void *unused)
 {
     return Py_BuildValue("ON", Py_TYPE(self), delta_getstate(self));
 }
