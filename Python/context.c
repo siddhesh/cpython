@@ -1061,14 +1061,14 @@ error:
 }
 
 static PyObject *
-token_get_var(PyContextToken *self)
+token_get_var(PyContextToken *self, void *closure)
 {
     Py_INCREF(self->tok_var);
     return (PyObject *)self->tok_var;
 }
 
 static PyObject *
-token_get_old_value(PyContextToken *self)
+token_get_old_value(PyContextToken *self, void *closure)
 {
     if (self->tok_oldval == NULL) {
         return get_token_missing();
