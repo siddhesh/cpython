@@ -1940,7 +1940,7 @@ PyDoc_STRVAR(alloc_doc,
 Return the number of bytes actually allocated.");
 
 static PyObject *
-bytearray_alloc(PyByteArrayObject *self)
+bytearray_alloc(PyByteArrayObject *self, PyObject *unused)
 {
     return PyLong_FromSsize_t(self->ob_alloc);
 }
@@ -2018,7 +2018,7 @@ Create a string of hexadecimal numbers from a bytearray object.\n\
 Example: bytearray([0xb9, 0x01, 0xef]).hex() -> 'b901ef'.");
 
 static PyObject *
-bytearray_hex(PyBytesObject *self)
+bytearray_hex(PyBytesObject *self, void *unused)
 {
     char* argbuf = PyByteArray_AS_STRING(self);
     Py_ssize_t arglen = PyByteArray_GET_SIZE(self);
@@ -2324,7 +2324,7 @@ bytearrayiter_next(bytesiterobject *it)
 }
 
 static PyObject *
-bytearrayiter_length_hint(bytesiterobject *it)
+bytearrayiter_length_hint(bytesiterobject *it, void *unused)
 {
     Py_ssize_t len = 0;
     if (it->it_seq) {
@@ -2340,7 +2340,7 @@ PyDoc_STRVAR(length_hint_doc,
     "Private method returning an estimate of len(list(it)).");
 
 static PyObject *
-bytearrayiter_reduce(bytesiterobject *it)
+bytearrayiter_reduce(bytesiterobject *it, void *unused)
 {
     if (it->it_seq != NULL) {
         return Py_BuildValue("N(O)n", _PyObject_GetBuiltin("iter"),

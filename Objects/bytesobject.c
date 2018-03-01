@@ -2430,7 +2430,7 @@ bytes_hex(PyBytesObject *self)
 }
 
 static PyObject *
-bytes_getnewargs(PyBytesObject *v)
+bytes_getnewargs(PyBytesObject *v, void *unused)
 {
     return Py_BuildValue("(y#)", v->ob_sval, Py_SIZE(v));
 }
@@ -3037,7 +3037,7 @@ striter_next(striterobject *it)
 }
 
 static PyObject *
-striter_len(striterobject *it)
+striter_len(striterobject *it, void *unused)
 {
     Py_ssize_t len = 0;
     if (it->it_seq)
@@ -3049,7 +3049,7 @@ PyDoc_STRVAR(length_hint_doc,
              "Private method returning an estimate of len(list(it)).");
 
 static PyObject *
-striter_reduce(striterobject *it)
+striter_reduce(striterobject *it, void *unused)
 {
     if (it->it_seq != NULL) {
         return Py_BuildValue("N(O)n", _PyObject_GetBuiltin("iter"),
