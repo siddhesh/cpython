@@ -1108,7 +1108,7 @@ static PyMemberDef wrapper_members[] = {
 };
 
 static PyObject *
-wrapper_objclass(wrapperobject *wp)
+wrapper_objclass(wrapperobject *wp, void *closure)
 {
     PyObject *c = (PyObject *)PyDescr_TYPE(wp->descr);
 
@@ -1117,7 +1117,7 @@ wrapper_objclass(wrapperobject *wp)
 }
 
 static PyObject *
-wrapper_name(wrapperobject *wp)
+wrapper_name(wrapperobject *wp, void *closure)
 {
     const char *s = wp->descr->d_base->name;
 
@@ -1137,7 +1137,7 @@ wrapper_text_signature(wrapperobject *wp, void *closure)
 }
 
 static PyObject *
-wrapper_qualname(wrapperobject *wp)
+wrapper_qualname(wrapperobject *wp, void *closure)
 {
     return descr_get_qualname((PyDescrObject *)wp->descr);
 }
