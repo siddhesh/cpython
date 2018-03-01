@@ -73,7 +73,7 @@ PyMethod_New(PyObject *func, PyObject *self)
 }
 
 static PyObject *
-method_reduce(PyMethodObject *im)
+method_reduce(PyMethodObject *im, void *unused)
 {
     PyObject *self = PyMethod_GET_SELF(im);
     PyObject *func = PyMethod_GET_FUNCTION(im);

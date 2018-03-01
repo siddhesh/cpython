@@ -439,7 +439,7 @@ calculate_qualname(PyDescrObject *descr)
 }
 
 static PyObject *
-descr_get_qualname(PyDescrObject *descr)
+descr_get_qualname(PyDescrObject *descr, void *unused)
 {
     if (descr->d_qualname == NULL)
         descr->d_qualname = calculate_qualname(descr);
@@ -448,7 +448,7 @@ descr_get_qualname(PyDescrObject *descr)
 }
 
 static PyObject *
-descr_reduce(PyDescrObject *descr)
+descr_reduce(PyDescrObject *descr, void *unused)
 {
     PyObject *builtins;
     PyObject *getattr;
@@ -868,28 +868,28 @@ mappingproxy_get(mappingproxyobject *pp, PyObject *args)
 }
 
 static PyObject *
-mappingproxy_keys(mappingproxyobject *pp)
+mappingproxy_keys(mappingproxyobject *pp, void *unused)
 {
     _Py_IDENTIFIER(keys);
     return _PyObject_CallMethodId(pp->mapping, &PyId_keys, NULL);
 }
 
 static PyObject *
-mappingproxy_values(mappingproxyobject *pp)
+mappingproxy_values(mappingproxyobject *pp, void *unused)
 {
     _Py_IDENTIFIER(values);
     return _PyObject_CallMethodId(pp->mapping, &PyId_values, NULL);
 }
 
 static PyObject *
-mappingproxy_items(mappingproxyobject *pp)
+mappingproxy_items(mappingproxyobject *pp, void *unused)
 {
     _Py_IDENTIFIER(items);
     return _PyObject_CallMethodId(pp->mapping, &PyId_items, NULL);
 }
 
 static PyObject *
-mappingproxy_copy(mappingproxyobject *pp)
+mappingproxy_copy(mappingproxyobject *pp, void *unused)
 {
     _Py_IDENTIFIER(copy);
     return _PyObject_CallMethodId(pp->mapping, &PyId_copy, NULL);
@@ -1086,7 +1086,7 @@ wrapper_repr(wrapperobject *wp)
 }
 
 static PyObject *
-wrapper_reduce(wrapperobject *wp)
+wrapper_reduce(wrapperobject *wp, void *unused)
 {
     PyObject *builtins;
     PyObject *getattr;
