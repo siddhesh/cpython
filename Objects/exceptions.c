@@ -714,7 +714,7 @@ ImportError_getstate(PyImportErrorObject *self)
 
 /* Pickling support */
 static PyObject *
-ImportError_reduce(PyImportErrorObject *self)
+ImportError_reduce(PyImportErrorObject *self, void *unused)
 {
     PyObject *res;
     PyObject *args;
@@ -1124,7 +1124,7 @@ OSError_str(PyOSErrorObject *self)
 }
 
 static PyObject *
-OSError_reduce(PyOSErrorObject *self)
+OSError_reduce(PyOSErrorObject *self, void *unused)
 {
     PyObject *args = self->args;
     PyObject *res = NULL, *tmp;
