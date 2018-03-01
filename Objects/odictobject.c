@@ -1201,21 +1201,21 @@ OrderedDict_popitem_impl(PyODictObject *self, int last)
 /* MutableMapping.keys() does not have a docstring. */
 PyDoc_STRVAR(odict_keys__doc__, "");
 
-static PyObject * odictkeys_new(PyObject *od);  /* forward */
+static PyObject * odictkeys_new(PyObject *od, void *unused);  /* forward */
 
 /* values() */
 
 /* MutableMapping.values() does not have a docstring. */
 PyDoc_STRVAR(odict_values__doc__, "");
 
-static PyObject * odictvalues_new(PyObject *od);  /* forward */
+static PyObject * odictvalues_new(PyObject *od, void *unused);  /* forward */
 
 /* items() */
 
 /* MutableMapping.items() does not have a docstring. */
 PyDoc_STRVAR(odict_items__doc__, "");
 
-static PyObject * odictitems_new(PyObject *od);  /* forward */
+static PyObject * odictitems_new(PyObject *od, void *unused);  /* forward */
 
 /* update() */
 
@@ -1233,7 +1233,7 @@ PyDoc_STRVAR(odict_clear__doc__,
              "od.clear() -> None.  Remove all items from od.");
 
 static PyObject *
-odict_clear(register PyODictObject *od)
+odict_clear(register PyODictObject *od, void *unused)
 {
     PyDict_Clear((PyObject *)od);
     _odict_clear_nodes(od);
@@ -1251,7 +1251,7 @@ static int _PyODict_SetItem_KnownHash(PyObject *, PyObject *, PyObject *,
 PyDoc_STRVAR(odict_copy__doc__, "od.copy() -> a shallow copy of od");
 
 static PyObject *
-odict_copy(register PyODictObject *od)
+odict_copy(register PyODictObject *od, void *unused)
 {
     _ODictNode *node;
     PyObject *od_copy;
@@ -1310,7 +1310,7 @@ PyDoc_STRVAR(odict_reversed__doc__, "od.__reversed__() <==> reversed(od)");
 static PyObject * odictiter_new(PyODictObject *, int);
 
 static PyObject *
-odict_reversed(PyODictObject *od)
+odict_reversed(PyODictObject *od, void *unused)
 {
     return odictiter_new(od, _odict_ITER_KEYS|_odict_ITER_REVERSED);
 }
@@ -1562,7 +1562,7 @@ odict_tp_clear(PyODictObject *od)
     PyObject *res;
     Py_CLEAR(od->od_inst_dict);
     Py_CLEAR(od->od_weakreflist);
-    res = odict_clear(od);
+    res = odict_clear(od, NULL);
     if (res == NULL)
         return -1;
     Py_DECREF(res);
@@ -2080,7 +2080,7 @@ PyTypeObject PyODictKeys_Type = {
 };
 
 static PyObject *
-odictkeys_new(PyObject *od)
+odictkeys_new(PyObject *od, void *unused)
 {
     return _PyDictView_New(od, &PyODictKeys_Type);
 }
@@ -2098,7 +2098,7 @@ odictitems_iter(_PyDictViewObject *dv)
 }
 
 static PyObject *
-odictitems_reversed(_PyDictViewObject *dv)
+odictitems_reversed(_PyDictViewObject *dv, void *unusable)
 {
     if (dv->dv_dict == NULL) {
         Py_RETURN_NONE;
@@ -2147,7 +2147,7 @@ PyTypeObject PyODictItems_Type = {
 };
 
 static PyObject *
-odictitems_new(PyObject *od)
+odictitems_new(PyObject *od, void *unused)
 {
     return _PyDictView_New(od, &PyODictItems_Type);
 }
@@ -2165,7 +2165,7 @@ odictvalues_iter(_PyDictViewObject *dv)
 }
 
 static PyObject *
-odictvalues_reversed(_PyDictViewObject *dv)
+odictvalues_reversed(_PyDictViewObject *dv, void *unused)
 {
     if (dv->dv_dict == NULL) {
         Py_RETURN_NONE;
@@ -2214,7 +2214,7 @@ PyTypeObject PyODictValues_Type = {
 };
 
 static PyObject *
-odictvalues_new(PyObject *od)
+odictvalues_new(PyObject *od, void *unused)
 {
     return _PyDictView_New(od, &PyODictValues_Type);
 }
