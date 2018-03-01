@@ -357,7 +357,7 @@ exit status will be one (i.e., failure)."
 
 
 static PyObject *
-sys_getdefaultencoding(PyObject *self)
+sys_getdefaultencoding(PyObject *self, void *unused)
 {
     return PyUnicode_FromString(PyUnicode_GetDefaultEncoding());
 }
@@ -370,7 +370,7 @@ implementation."
 );
 
 static PyObject *
-sys_getfilesystemencoding(PyObject *self)
+sys_getfilesystemencoding(PyObject *self, void *unused)
 {
     if (Py_FileSystemDefaultEncoding)
         return PyUnicode_FromString(Py_FileSystemDefaultEncoding);
@@ -387,7 +387,7 @@ operating system filenames."
 );
 
 static PyObject *
-sys_getfilesystemencodeerrors(PyObject *self)
+sys_getfilesystemencodeerrors(PyObject *self, void *unused)
 {
     if (Py_FileSystemDefaultEncodeErrors)
         return PyUnicode_FromString(Py_FileSystemDefaultEncodeErrors);
@@ -988,7 +988,7 @@ dependent."
 );
 
 static PyObject *
-sys_getrecursionlimit(PyObject *self)
+sys_getrecursionlimit(PyObject *self, void *unused)
 {
     return PyLong_FromLong(Py_GetRecursionLimit());
 }
@@ -1274,7 +1274,7 @@ sys_getrefcount(PyObject *self, PyObject *arg)
 
 #ifdef Py_REF_DEBUG
 static PyObject *
-sys_gettotalrefcount(PyObject *self)
+sys_gettotalrefcount(PyObject *self, void *unused)
 {
     return PyLong_FromSsize_t(_Py_GetRefTotal());
 }
@@ -1289,7 +1289,7 @@ reference as an argument to getrefcount()."
 );
 
 static PyObject *
-sys_getallocatedblocks(PyObject *self)
+sys_getallocatedblocks(PyObject *self, void *unused)
 {
     return PyLong_FromSsize_t(_Py_GetAllocatedBlocks());
 }
@@ -1401,7 +1401,7 @@ a 11-tuple where the entries in the tuple are counts of:\n\
 );
 
 static PyObject *
-sys_callstats(PyObject *self)
+sys_callstats(PyObject *self, void *unused)
 {
     if (PyErr_WarnEx(PyExc_DeprecationWarning,
                       "sys.callstats() has been deprecated in Python 3.7 "
