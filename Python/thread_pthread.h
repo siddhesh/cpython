@@ -152,6 +152,19 @@ PyThread__init_thread(void)
  * Thread support.
  */
 
+typedef struct {
+    void (*func) (void *);
+    void *arg;
+} pthread_func;
+
+static void *
+pthread_helper_func(void *fn)
+{
+    pthread_func *pfn = fn;
+
+    pfn->func(pfn->arg);
+    return NULL;
+}
 
 unsigned long
 PyThread_start_new_thread(void (*func)(void *), void *arg)
@@ -188,14 +201,16 @@ PyThread_start_new_thread(void (*func)(void *), void *arg)
     pthread_attr_setscope(&attrs, PTHREAD_SCOPE_SYSTEM);
 #endif
 
+    pthread_func fn = {func, arg};
+
     status = pthread_create(&th,
 #if defined(THREAD_STACK_SIZE) || defined(PTHREAD_SYSTEM_SCHED_SUPPORTED)
                              &attrs,
 #else
                              (pthread_attr_t*)NULL,
 #endif
-                             (void* (*)(void *))func,
-                             (void *)arg
+                             pthread_helper_func,
+                             (void*)&fn
                              );
 
 #if defined(THREAD_STACK_SIZE) || defined(PTHREAD_SYSTEM_SCHED_SUPPORTED)
