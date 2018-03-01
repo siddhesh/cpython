@@ -13792,7 +13792,7 @@ unicode_sizeof_impl(PyObject *self)
 }
 
 static PyObject *
-unicode_getnewargs(PyObject *v)
+unicode_getnewargs(PyObject *v, void *unused)
 {
     PyObject *copy = _PyUnicode_Copy(v);
     if (!copy)
@@ -15334,7 +15334,7 @@ unicodeiter_next(unicodeiterobject *it)
 }
 
 static PyObject *
-unicodeiter_len(unicodeiterobject *it)
+unicodeiter_len(unicodeiterobject *it, void *unused)
 {
     Py_ssize_t len = 0;
     if (it->it_seq)
@@ -15345,7 +15345,7 @@ unicodeiter_len(unicodeiterobject *it)
 PyDoc_STRVAR(length_hint_doc, "Private method returning an estimate of len(list(it)).");
 
 static PyObject *
-unicodeiter_reduce(unicodeiterobject *it)
+unicodeiter_reduce(unicodeiterobject *it, void *unused)
 {
     if (it->it_seq != NULL) {
         return Py_BuildValue("N(O)n", _PyObject_GetBuiltin("iter"),

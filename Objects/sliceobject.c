@@ -36,7 +36,7 @@ ellipsis_repr(PyObject *op)
 }
 
 static PyObject *
-ellipsis_reduce(PyObject *op)
+ellipsis_reduce(PyObject *op, void *unused)
 {
     return PyUnicode_FromString("Ellipsis");
 }
@@ -546,7 +546,7 @@ S. Out of bounds indices are clipped in a manner consistent with the\n\
 handling of normal slices.");
 
 static PyObject *
-slice_reduce(PySliceObject* self)
+slice_reduce(PySliceObject* self, void *unused)
 {
     return Py_BuildValue("O(OOO)", Py_TYPE(self), self->start, self->stop, self->step);
 }

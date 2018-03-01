@@ -452,7 +452,7 @@ proxy_checkref(PyWeakReference *proxy)
 
 #define WRAP_METHOD(method, special) \
     static PyObject * \
-    method(PyObject *proxy) { \
+    method(PyObject *proxy, void *unused) { \
             _Py_IDENTIFIER(special); \
             UNWRAP(proxy); \
                 return _PyObject_CallMethodId(proxy, &PyId_##special, NULL); \
